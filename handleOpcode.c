@@ -20,7 +20,7 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 	(void)line_number;
 	for (i = 0; instList[i].opcode != NULL; i++)
 	{
-		if (strcmp(instList[i].opcode, opcode[0]) == 0)
+		if (strcmp(instList[i].opcode, commandArgs[0]) == 0)
 		{
 			return (instList[i].f);
 		}
@@ -37,8 +37,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 	stack_t *newNode = malloc(sizeof(stack_t));
 
 	(void)line_number;
-	if (commandArgs[1] == NULL ||
-		(atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
+	if (commandArgs[1] == NULL || (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
 	{
 		free(newNode);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);

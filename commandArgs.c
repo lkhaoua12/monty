@@ -15,13 +15,12 @@ char **split_string(char *input, char *delim, int *arg_num)
 	char *token = NULL;
 	char *state;
 	int count = 0;
-	char * new_str = trim_string(str);
 
-	if (!new_str)
+	if (!str)
 	{
 		return (NULL);
 	}
-	token = strtok_custom(new_str, delim, &state);
+	token = strtok_custom(str, delim, &state);
 	while (token != NULL)
 	{
 		tokens = realloc(tokens, sizeof(char *) * (count + 1));

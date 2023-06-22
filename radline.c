@@ -1,4 +1,5 @@
 #include "monty.h"
+#define BUF_SIZE 125
 /**
  * readLine - Reads a line from a file descriptor.
  * @fd: The file descriptor to read from.
@@ -9,7 +10,7 @@
  */
 char *readLine(int fd)
 {
-	char *buffer = malloc(sizeof(char) * BUFSIZ);
+	char *buffer = malloc(sizeof(char) * BUF_SIZE);
 	ssize_t bytesRead;
 	char c;
 	int index = 0;

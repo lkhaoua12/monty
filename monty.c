@@ -30,7 +30,14 @@ int main(int argc, char *argv[])
 	line = readLine(fd);
 	while (line != NULL)
 	{
-		commandArgs = split_string(line, " ", &commandCount);
+		char *trimmed_line = trim_string(line);
+		if (*trimmed_line == '\0')
+		{
+			free(line);
+			line = readLine(fd);
+			continue;
+		}
+		commandArgs = split_string(trimmed_line, " ", &commandCount);
 		free(line);
 		line = NULL;
 		f = handleOpcode(commandArgs, line_number);
