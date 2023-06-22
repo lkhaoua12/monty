@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		f = handleOpcode(commandArgs, line_number);
 		if (!f)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s", line_number, commandArgs[0]);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, commandArgs[0]);
 			freeArgs(commandArgs);
 			freeList(head);
 			exit(EXIT_FAILURE);
