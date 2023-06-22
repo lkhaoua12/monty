@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 void freeArgs(char **commands)
 {
 	int i;
+
 	for (i = 0; commands[i] != NULL; i++)
 		free(commands[i]);
 	free(commands);

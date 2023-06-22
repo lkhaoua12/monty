@@ -38,7 +38,8 @@ typedef struct instruction_s
 void freeArgs(char **commands);
 char **split_string(char *input, char *delim, int *arg_num);
 char *readLine(int fd);
-void (*handleOpcode(char **opcode, unsigned int line_number))(stack_t **stack, unsigned int line_number);
+void (*handleOpcode(char **opcode,
+	unsigned int line_number))(stack_t **stack, unsigned int line_number);
 char *strtok_custom(char *str, const char *delim, char **state);
 void handlePush(stack_t **stack, unsigned int line_number);
 void handlePrint(stack_t **stack, unsigned int line_number);

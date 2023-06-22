@@ -7,16 +7,17 @@
  *
  * Return: Pointer to the corresponding function, or NULL if not found
  */
-void (*handleOpcode(char **opcode, unsigned int line_number))(stack_t **stack, unsigned int line_number)
+void (*handleOpcode(char **opcode,
+	unsigned int line_number))(stack_t **stack, unsigned int line_number)
 {
 	int i;
-
 	instruction_t instList[] = {
 		{"push", handlePush},
 		{"pall", handlePrint},
 		{NULL, NULL}
 	};
 
+	(void)line_number;
 	for (i = 0; instList[i].opcode != NULL; i++)
 	{
 		if (strcmp(instList[i].opcode, opcode[0]) == 0)
