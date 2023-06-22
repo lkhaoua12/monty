@@ -19,3 +19,11 @@ void handleAdd(stack_t **stack, unsigned int line_number)
 	free(current);
 }
 
+void handleNop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+
+	return;
+}
+
