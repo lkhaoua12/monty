@@ -15,6 +15,8 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 		{"push", handlePush},
 		{"pall", handlePrint},
 		{"pint", handlePint},
+		{"pop", handlePop},
+
 		{NULL, NULL}
 	};
 
@@ -124,4 +126,25 @@ void handlePint(stack_t **stack, unsigned int line_number)
 		current = current->next;
 	}
 	printf("%d\n", current->n);
+}
+void handlePop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current;
+
+	(void)line_number;
+	if (stack == NULL || (*stack) == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		freeArgs(commandArgs);
+		freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	current = *stack;
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	current->prev->next = NULL;
+	free(current);
 }
