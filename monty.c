@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 char **commandArgs;
 /**
  * main - Entry point of the program
@@ -33,7 +34,13 @@ int main(int argc, char *argv[])
 		free(line);
 		line = NULL;
 		f = handleOpcode(commandArgs, line_number);
-
+		if (!f)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s", line_number, commandArgs[0]);
+			freeArgs(commandArgs);
+			freeList(head);
+			exit(EXIT_FAILURE);
+		}
 		f(&head, line_number);
 		line_number++;
 		freeArgs(commandArgs);
