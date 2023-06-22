@@ -13,6 +13,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "Error: malloc failed");
 		freeArgs(commandArgs);
 		freeList(*stack);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	(void)line_number;
@@ -22,6 +23,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		freeArgs(commandArgs);
 		freeList(*stack);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	newNode->n = atoi(commandArgs[1]);
@@ -61,6 +63,7 @@ void handlePint(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		freeArgs(commandArgs);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	if (stack == NULL || (*stack) == NULL)
@@ -78,6 +81,7 @@ void handlePop(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pop, stack empty\n", line_number);
 		freeArgs(commandArgs);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	current = *stack;
@@ -98,6 +102,7 @@ void handleSwap(stack_t **stack, unsigned int line_number)
 		freeArgs(commandArgs);
 		if (*stack)
 			freeList(*stack);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	temp = (*stack)->next->n;
