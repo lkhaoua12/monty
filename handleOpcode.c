@@ -73,13 +73,6 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
 
-	if (commandArgs[1] != NULL)
-	{
-		fprintf(stderr, "L%d: usage: pall\n", line_number);
-		freeArgs(commandArgs);
-		freeList(*stack);
-		exit(EXIT_FAILURE);
-	}
 	if (stack == NULL || (*stack) == NULL)
 		return;
 
@@ -118,15 +111,9 @@ void handlePop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	current = *stack;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
-	if (current->prev != NULL)
-		current->prev->next = NULL;
-	if (current == *stack)
-		*stack = NULL;
-	else
-		*stack = current->prev;
+	*stack = current->next;
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
+
 	free(current);
 }
