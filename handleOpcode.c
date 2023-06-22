@@ -50,7 +50,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 	if (commandArgs[1] == NULL || (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
 	{
 		free(newNode);
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		freeArgs(commandArgs);
 		freeList(*stack);
 		exit(EXIT_FAILURE);
@@ -73,6 +73,7 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
 
+	(void)line_number;
 	if (stack == NULL || (*stack) == NULL)
 		return;
 
@@ -89,7 +90,7 @@ void handlePint(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || (*stack) == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		freeArgs(commandArgs);
 		exit(EXIT_FAILURE);
 	}
