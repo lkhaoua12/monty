@@ -37,7 +37,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 	stack_t *newNode = malloc(sizeof(stack_t));
 
 	(void)line_number;
-	if (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0')
+	if (commandArgs[1] == NULL ||
+		(atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
 	{
 		free(newNode);
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
