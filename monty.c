@@ -56,7 +56,8 @@ int main(int argc, char *argv[])
 		line = readLine(fd);
 	}
 	close(fd);
-	freeList(head);
+	if (head != NULL)
+		freeList(head);
 	return (EXIT_SUCCESS);
 }
 /**

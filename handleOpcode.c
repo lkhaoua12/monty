@@ -113,7 +113,6 @@ void handlePint(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		freeArgs(commandArgs);
-		freeList(*stack);
 		exit(EXIT_FAILURE);
 	}
 	if (stack == NULL || (*stack) == NULL)
@@ -134,9 +133,8 @@ void handlePop(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if (stack == NULL || (*stack) == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		fprintf(stderr, "L%d: can't pop, stack empty\n", line_number);
 		freeArgs(commandArgs);
-		freeList(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -145,6 +143,7 @@ void handlePop(stack_t **stack, unsigned int line_number)
 	{
 		current = current->next;
 	}
-	current->prev->next = NULL;
+	if (current->prev != NULL) 
+		current->prev->next = NULL;
 	free(current);
 }
