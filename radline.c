@@ -1,5 +1,5 @@
 #include "monty.h"
-#define BUF_SIZE 125
+#define BUF_SIZE 1024
 /**
  * readLine - Reads a line from a file descriptor.
  * @fd: The file descriptor to read from.
