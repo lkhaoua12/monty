@@ -126,24 +126,27 @@ void handlePint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", current->n);
 }
+
 void handlePop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
 
-	(void)line_number;
 	if (stack == NULL || (*stack) == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop, stack empty\n", line_number);
 		freeArgs(commandArgs);
 		exit(EXIT_FAILURE);
 	}
-
 	current = *stack;
 	while (current->next != NULL)
 	{
 		current = current->next;
 	}
-	if (current->prev != NULL) 
+	if (current->prev != NULL)
 		current->prev->next = NULL;
+	if (current == *stack)
+		*stack = NULL;
+	else
+		*stack = current->prev;
 	free(current);
 }
