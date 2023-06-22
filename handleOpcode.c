@@ -36,6 +36,13 @@ void handlePush(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
 
+	if (newNode == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		freeArgs(commandArgs);
+		freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
 	(void)line_number;
 	if (commandArgs[1] == NULL || (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
 	{
