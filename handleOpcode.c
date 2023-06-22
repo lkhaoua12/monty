@@ -14,6 +14,7 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 	instruction_t instList[] = {
 		{"push", handlePush},
 		{"pall", handlePrint},
+		{"pint", handlePint},
 		{NULL, NULL}
 	};
 
@@ -101,4 +102,26 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 		printf("%d\n", current->n);
 		current = current->prev;
 	}
+}
+void handlePint(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current;
+
+	if (commandArgs[1] != NULL)
+	{
+		fprintf(stderr, "L%d: usage: pall\n", line_number);
+		freeArgs(commandArgs);
+		freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
+	if (stack == NULL || (*stack) == NULL)
+		return;
+
+	current = *stack;
+	(void)line_number;
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	printf("%d\n", current->n);
 }
