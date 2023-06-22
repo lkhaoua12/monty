@@ -2,7 +2,6 @@
 
 void handleAdd(stack_t **stack, unsigned int line_number)
 {
-	int temp;
 	stack_t *current; 
 
 	if (stack == NULL || (*stack) == NULL || !(*stack)->next)
