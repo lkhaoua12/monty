@@ -20,7 +20,7 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 	(void)line_number;
 	for (i = 0; instList[i].opcode != NULL; i++)
 	{
-		if (strcmp(instList[i].opcode, commandArgs[0]) == 0)
+		if (strcmp(instList[i].opcode, opcode[0]) == 0)
 		{
 			return (instList[i].f);
 		}
