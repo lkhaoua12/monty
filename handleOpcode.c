@@ -71,8 +71,12 @@ void handlePush(stack_t **stack, unsigned int line_number)
  */
 void handlePrint(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current = *stack;
+	stack_t *current;
 
+	if (stack == NULL || (*stack) == NULL)
+		return;
+
+	current = *stack;
 	(void)line_number;
 	while (current->next != NULL)
 	{
