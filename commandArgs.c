@@ -16,6 +16,7 @@ char **split_string(char *input, char *delim, int *arg_num)
 	char *state;
 	int count = 0;
 	char * new_str = trim_string(str);
+
 	if (!new_str)
 	{
 		return (NULL);
@@ -73,6 +74,9 @@ char *strtok_custom(char *str, const char *delim, char **state)
  */
 char *trim_string(char *str)
 {
+	char *end, *src, *dst;
+	int space_flag = 0;
+
 	if (str == NULL)
 		return NULL;
 	while (isspace(*str))
@@ -80,15 +84,15 @@ char *trim_string(char *str)
 		str++;
 	}
 
-	char *end = str + strlen(str) - 1;
+	end = str + strlen(str) - 1;
 	while (end > str && isspace(*end))
 	{
 		*end = '\0';
 		end--;
 	}
-	char *src = str;
-	char *dst = str;
-	int space_flag = 0;
+	src = str;
+	dst = str;
+	space_flag = 0;
 	while (*src)
 	{
 		if (isspace(*src))
