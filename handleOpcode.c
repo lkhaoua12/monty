@@ -107,9 +107,9 @@ void handlePint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
 
-	if (commandArgs[1] != NULL)
+	if (stack == NULL || (*stack) == NULL)
 	{
-		fprintf(stderr, "L%d: usage: pall\n", line_number);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		freeArgs(commandArgs);
 		freeList(*stack);
 		exit(EXIT_FAILURE);
