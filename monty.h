@@ -48,5 +48,6 @@ char *trim_string(char *str);
 void handlePint(stack_t **stack, unsigned int line_number);
 void handlePop(stack_t **stack, unsigned int line_number);
 void handleSwap(stack_t **stack, unsigned int line_number);
+void handleAdd(stack_t **stack, unsigned int line_number);
 #endif
 

@@ -17,7 +17,7 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 		{"pint", handlePint},
 		{"pop", handlePop},
 		{"swap", handleSwap},
-
+		{"add", handleAdd},
 		{NULL, NULL}
 	};
 
