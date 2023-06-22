@@ -71,7 +71,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 			cur = cur->next;
 		}
 		cur->next = newNode;
-		newNode->prev = cur;
+		if (cur != NULL)
+			newNode->prev = cur;
 	}
 }
 /**
