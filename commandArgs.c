@@ -77,7 +77,7 @@ char *trim_string(char *str)
 	int space_flag = 0;
 
 	if (str == NULL)
-		return NULL;
+		return (NULL);
 	while (isspace(*str))
 	{
 		str++;
@@ -112,5 +112,5 @@ char *trim_string(char *str)
 		src++;
 	}
 	*dst = '\0';
-	return str;
+	return (str);
 }

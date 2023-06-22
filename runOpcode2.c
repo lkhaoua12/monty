@@ -2,7 +2,7 @@
 
 void handleAdd(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current; 
+	stack_t *current;
 
 	if (stack == NULL || (*stack) == NULL || !(*stack)->next)
 	{
@@ -23,7 +23,5 @@ void handleNop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-
-	return;
 }
 

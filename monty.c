@@ -10,12 +10,7 @@ char **commandArgs;
  */
 int main(int argc, char *argv[])
 {
-	char *line;
-	stack_t *head = NULL;
-	int fd, commandCount;
-	unsigned int line_number = 1;
-	void (*f)(stack_t **stack, unsigned int line_number);
-	char *trimmed_line;
+	int fd;
 
 	if (argc != 2)
 	{
@@ -28,6 +23,19 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
+	executeCommands(fd);
+	close(fd);
+	return (EXIT_SUCCESS);
+}
+
+void executeCommands(int fd)
+{
+	int commandCount;
+	char *line, *trimmed_line;
+	stack_t *head = NULL;
+	unsigned int line_number = 1;
+	void (*f)(stack_t **stack, unsigned int line_number);
+
 	line = readLine(fd);
 	while (line != NULL)
 	{
@@ -41,25 +49,26 @@ int main(int argc, char *argv[])
 		commandArgs = split_string(trimmed_line, " ", &commandCount);
 		free(line);
 		line = NULL;
+
 		f = handleOpcode(commandArgs, line_number);
 		if (!f)
 		{
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, commandArgs[0]);
+			fprintf(stderr, "L%u: unknown instruction %s\n",
+		line_number, commandArgs[0]);
 			freeArgs(commandArgs);
 			freeList(head);
 			close(fd);
 			exit(EXIT_FAILURE);
 		}
+
 		f(&head, line_number);
 		line_number++;
 		freeArgs(commandArgs);
 		commandArgs = NULL;
 		line = readLine(fd);
 	}
-	close(fd);
 	if (head != NULL)
 		freeList(head);
-	return (EXIT_SUCCESS);
 }
 /**
  * freeorgs - free list of args.

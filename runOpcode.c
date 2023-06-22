@@ -17,7 +17,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	(void)line_number;
-	if (commandArgs[1] == NULL || (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
+	if (commandArgs[1] == NULL
+		|| (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
 	{
 		free(newNode);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
