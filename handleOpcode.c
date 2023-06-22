@@ -84,7 +84,6 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 		return;
 
 	current = *stack;
-	(void)line_number;
 	while (current != NULL)
 	{
 		printf("%d\n", current->n);
@@ -105,11 +104,6 @@ void handlePint(stack_t **stack, unsigned int line_number)
 		return;
 
 	current = *stack;
-	(void)line_number;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
 	printf("%d\n", current->n);
 }
 
