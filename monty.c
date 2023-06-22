@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 	int fd, commandCount;
 	unsigned int line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
+	char *trimmed_line;
 
 	if (argc != 2)
 	{
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
 	line = readLine(fd);
 	while (line != NULL)
 	{
-		char *trimmed_line = trim_string(line);
+		trimmed_line = trim_string(line);
 		if (*trimmed_line == '\0')
 		{
 			free(line);
