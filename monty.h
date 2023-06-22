@@ -44,5 +44,6 @@ char *strtok_custom(char *str, const char *delim, char **state);
 void handlePush(stack_t **stack, unsigned int line_number);
 void handlePrint(stack_t **stack, unsigned int line_number);
 void freeList(stack_t *head);
+char *trim_string(char *str);
 #endif
 

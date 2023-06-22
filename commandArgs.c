@@ -15,12 +15,12 @@ char **split_string(char *input, char *delim, int *arg_num)
 	char *token = NULL;
 	char *state;
 	int count = 0;
-
-	if (!str)
+	char * new_str = trim_string(str);
+	if (!new_str)
 	{
 		return (NULL);
 	}
-	token = strtok_custom(str, delim, &state);
+	token = strtok_custom(new_str, delim, &state);
 	while (token != NULL)
 	{
 		tokens = realloc(tokens, sizeof(char *) * (count + 1));
@@ -64,4 +64,50 @@ char *strtok_custom(char *str, const char *delim, char **state)
 		*state += strlen(*state);
 
 	return (token_start);
+}
+/**
+ * fix_string - Fixes a string by trimming leading and trailing spaces
+ *              and removing spaces between tokens.
+ * @str: The string to be fixed.
+ * Return: The fixed string.
+ */
+char *trim_string(char *str)
+{
+	if (str == NULL)
+		return NULL;
+	while (isspace(*str))
+	{
+		str++;
+	}
+
+	char *end = str + strlen(str) - 1;
+	while (end > str && isspace(*end))
+	{
+		*end = '\0';
+		end--;
+	}
+	char *src = str;
+	char *dst = str;
+	int space_flag = 0;
+	while (*src)
+	{
+		if (isspace(*src))
+		{
+			space_flag = 1;
+		}
+		else
+		{
+			if (space_flag)
+			{
+				*dst = ' ';
+				dst++;
+			}
+			space_flag = 0;
+			*dst = *src;
+			dst++;
+		}
+		src++;
+	}
+	*dst = '\0';
+	return str;
 }

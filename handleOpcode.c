@@ -7,8 +7,8 @@
  *
  * Return: Pointer to the corresponding function, or NULL if not found
  */
-void (*handleOpcode(char **opcode,
-	unsigned int line_number))(stack_t **stack, unsigned int line_number)
+void (*handleOpcode(char **opcode, unsigned int line_number))
+(stack_t **stack, unsigned int line_number)
 {
 	int i;
 	instruction_t instList[] = {
