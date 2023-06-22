@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 #include <string.h>
 /**
  * handleOpcode - Handles the opcode and returns the corresponding function
@@ -6,7 +7,7 @@
  *
  * Return: Pointer to the corresponding function, or NULL if not found
  */
-void (*handleOpcode(char **opcode))(stack_t **stack, unsigned int line_number)
+void (*handleOpcode(char **opcode, unsigned int line_number))(stack_t **stack, unsigned int line_number)
 {
 	int i;
 
@@ -35,9 +36,16 @@ void handlePush(stack_t **stack, unsigned int line_number)
 	stack_t *newNode = malloc(sizeof(stack_t));
 
 	(void)line_number;
+	if (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0')
+	{
+		free(newNode);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		freeArgs(commandArgs);
+		freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
 	newNode->n = atoi(commandArgs[1]);
 	newNode->next = NULL;
-
 	if ((*stack) == NULL)
 	{
 		*stack = newNode;

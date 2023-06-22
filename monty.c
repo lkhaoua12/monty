@@ -10,8 +10,9 @@ char **commandArgs;
 int main(int argc, char *argv[])
 {
 	char *line;
-	stack_t *head = NULL, *temp = head;
-	int fd, lineNumber = 1, commandCount;
+	stack_t *head = NULL;
+	int fd, commandCount;
+	unsigned int line_number = 1;
 	void (*f)(stack_t **stack, unsigned int line_number);
 
 	if (argc != 2)
@@ -29,23 +30,18 @@ int main(int argc, char *argv[])
 	while (line != NULL)
 	{
 		commandArgs = split_string(line, " ", &commandCount);
-		f = handleOpcode(commandArgs);
-
-		f(&head, lineNumber);
-		lineNumber++;
-		freeArgs(commandArgs);
-		commandArgs = NULL;
 		free(line);
 		line = NULL;
+		f = handleOpcode(commandArgs, line_number);
+
+		f(&head, line_number);
+		line_number++;
+		freeArgs(commandArgs);
+		commandArgs = NULL;
 		line = readLine(fd);
 	}
-	while (head)
-	{
-		temp = head;
-		head = head->next;
-		free(temp);
-	}
 	close(fd);
+	freeList(head);
 	return (EXIT_SUCCESS);
 }
 /**
@@ -59,4 +55,15 @@ void freeArgs(char **commands)
 	for (i = 0; commands[i] != NULL; i++)
 		free(commands[i]);
 	free(commands);
+}
+void freeList(stack_t *head)
+{
+	stack_t *temp = head;
+
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
 }
