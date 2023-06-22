@@ -56,24 +56,13 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	newNode->n = atoi(commandArgs[1]);
-	newNode->next = NULL;
-	if ((*stack) == NULL)
+	newNode->next = *stack;
+	newNode->prev = NULL;
+	if ((*stack) != NULL)
 	{
-		*stack = newNode;
-		newNode->prev = NULL;
+		(*stack)->prev = newNode;
 	}
-	else
-	{
-		stack_t *cur = *stack;
-
-		while (cur->next != NULL)
-		{
-			cur = cur->next;
-		}
-		cur->next = newNode;
-		if (cur != NULL)
-			newNode->prev = cur;
-	}
+	*stack = newNode;
 }
 /**
  * handlePrint - Handles the "pall" opcode
@@ -96,14 +85,10 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 
 	current = *stack;
 	(void)line_number;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
 	while (current != NULL)
 	{
 		printf("%d\n", current->n);
-		current = current->prev;
+		current = current->next;
 	}
 }
 void handlePint(stack_t **stack, unsigned int line_number)

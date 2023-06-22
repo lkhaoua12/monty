@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 /**
- * freeArgs - free list of args.
+ * freeorgs - free list of args.
  * @commands: pointer to char pointer.
  * Return: void.
  */
