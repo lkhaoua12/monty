@@ -40,7 +40,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 			break;
 		}
 	}
-	if (num == 0 && commandArgs[1][j] != '0' || is_digit)
+	if ((num == 0 && commandArgs[1][j] != '0') || is_digit)
 	{
 		free(newNode);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
