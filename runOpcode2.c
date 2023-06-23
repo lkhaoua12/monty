@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 /**
  * handleAdd - Adds the top two elements of the stack.
  * @stack: Double pointer to the top of the stack.
@@ -32,4 +33,26 @@ void handleNop(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	(void)line_number;
 }
+/**
+ * handleSub - Adds the top two elements of the stack.
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: The line number of the instruction.
+ */
+void handleSub(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current = *stack;
 
+	if (stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't sub, stack too short", line_number);
+		freeArgs(commandArgs);
+		if (*stack)
+			freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
+	current = *stack;
+	current->next->n -= current->n; 
+	*stack = current->next;
+	free(current);
+	(*stack)->prev = NULL;
+}

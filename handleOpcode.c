@@ -19,6 +19,7 @@ int handleOpcode(char **opcode, unsigned int line_number, stack_t **stack)
 		{"swap", handleSwap},
 		{"add", handleAdd},
 		{"nop", handleNop},
+		{"sub", handleSub},
 		{NULL, NULL}
 	};
 
