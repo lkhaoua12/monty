@@ -65,7 +65,7 @@ void handleDiv(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
-	if (stack == NULL || (*stack)->next == NULL)
+	if (stack == NULL || (*stack) == NULL ||(*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
 		freeArgs(commandArgs);
