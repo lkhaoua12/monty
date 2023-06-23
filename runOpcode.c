@@ -8,7 +8,7 @@
 void handlePush(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
-	int num, is_digit = 0, j = 0, i;
+	int num, is_digit = 0;
 
 	if (newNode == NULL)
 	{
