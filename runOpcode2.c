@@ -83,11 +83,10 @@ void handleDiv(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
+	(*stack)->next->n /= (*stack)->n;
 	current = *stack;
-	current->next->n /= current->n;
-	*stack = current->next;
+	(*stack) = (*stack)->next;
 	free(current);
-	(*stack)->prev = NULL;
 }
 /**
  * handleMul - Adds the top two elements of the stack.
