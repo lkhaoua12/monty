@@ -46,6 +46,7 @@ void executeCommands(int fd)
 		trimmed_line = trim_string(line);
 		if (*trimmed_line == '\0' || *trimmed_line == '#')
 		{
+			line_number++;
 			free(line);
 			line = readLine(fd);
 			continue;
