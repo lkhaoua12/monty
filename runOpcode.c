@@ -8,7 +8,7 @@
 void handlePush(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
-	int num, is_digit = 0;
+	int num, is_digit = 1;
 
 	if (newNode == NULL)
 	{
@@ -18,7 +18,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
-	is_digit = _isDigit(commandArgs[1]);
+	if (commandArgs[1] != NULL)
+		is_digit = _isDigit(commandArgs[1]);
 	if (commandArgs[1] == NULL || is_digit == 1)
 	{
 		free(newNode);
