@@ -8,7 +8,7 @@
 void handlePush(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
-	int num, is_digit = 0, j = 0;
+	int num, is_digit = 0, j = 0, i;
 
 	if (newNode == NULL)
 	{
@@ -30,7 +30,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 	num = atoi(commandArgs[1]);
 	if (*commandArgs[1] == '-')
 		j++;
-	for (int i = 0; commandArgs[1][i] != '\0'; i++)
+	for (i = 0; commandArgs[1][i] != '\0'; i++)
 	{
 		if (i == 0 && commandArgs[1][i] == '-')
 			continue;
