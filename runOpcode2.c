@@ -1,5 +1,9 @@
 #include "monty.h"
-
+/**
+ * handleAdd - Adds the top two elements of the stack.
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: The line number of the instruction.
+ */
 void handleAdd(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
@@ -18,7 +22,11 @@ void handleAdd(stack_t **stack, unsigned int line_number)
 	(*stack) = (*stack)->next;
 	free(current);
 }
-
+/**
+ * handleNop - Does nothing.
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: The line number of the instruction.
+ */
 void handleNop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;

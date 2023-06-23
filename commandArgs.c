@@ -66,7 +66,7 @@ char *strtok_custom(char *str, const char *delim, char **state)
 	return (token_start);
 }
 /**
- * fix_string - Fixes a string by trimming leading and trailing spaces
+ * trim_string - Fixes a string by trimming leading and trailing spaces
  *              and removing spaces between tokens.
  * @str: The string to be fixed.
  * Return: The fixed string.

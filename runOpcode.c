@@ -56,6 +56,11 @@ void handlePrint(stack_t **stack, unsigned int line_number)
 		current = current->next;
 	}
 }
+/**
+ * handlePint - Prints the value at the top of the stack.
+ * @stack: Pointer to the stack.
+ * @line_number: Line number of the command in the script file.
+ */
 void handlePint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
@@ -73,7 +78,11 @@ void handlePint(stack_t **stack, unsigned int line_number)
 	current = *stack;
 	printf("%d\n", current->n);
 }
-
+/**
+ * handlePop - Removes the top element of the stack.
+ * @stack: Pointer to the stack.
+ * @line_number: Line number of the command in the script file.
+ */
 void handlePop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
@@ -92,7 +101,11 @@ void handlePop(stack_t **stack, unsigned int line_number)
 
 	free(current);
 }
-
+/**
+ * handleSwap - Swaps the top two elements of the stack.
+ * @stack: Pointer to the stack.
+ * @line_number: Line number of the command in the script file.
+ */
 void handleSwap(stack_t **stack, unsigned int line_number)
 {
 	int temp;

@@ -27,14 +27,18 @@ int main(int argc, char *argv[])
 	close(fd);
 	return (EXIT_SUCCESS);
 }
-
+/**
+ * executeCommands - radlines and run the commands.
+ * @fd: number of the open file.
+ * Return: void.
+ */
 void executeCommands(int fd)
 {
 	int commandCount;
 	char *line, *trimmed_line;
 	stack_t *head = NULL;
 	unsigned int line_number = 1;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	int f;
 
 	line = readLine(fd);
 	while (line != NULL)
@@ -50,8 +54,8 @@ void executeCommands(int fd)
 		free(line);
 		line = NULL;
 
-		f = handleOpcode(commandArgs, line_number);
-		if (!f)
+		f = handleOpcode(commandArgs, line_number, &head);
+		if (f == 1)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n",
 		line_number, commandArgs[0]);
@@ -60,8 +64,6 @@ void executeCommands(int fd)
 			close(fd);
 			exit(EXIT_FAILURE);
 		}
-
-		f(&head, line_number);
 		line_number++;
 		freeArgs(commandArgs);
 		commandArgs = NULL;
@@ -71,7 +73,7 @@ void executeCommands(int fd)
 		freeList(head);
 }
 /**
- * freeorgs - free list of args.
+ * freeArgs - free list of args.
  * @commands: pointer to char pointer.
  * Return: void.
  */
@@ -83,6 +85,11 @@ void freeArgs(char **commands)
 		free(commands[i]);
 	free(commands);
 }
+/**
+ * freeList - free list of args.
+ * @head: pointer to top of the stack.
+ * Return: void.
+ */
 void freeList(stack_t *head)
 {
 	stack_t *temp = head;

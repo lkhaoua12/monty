@@ -4,11 +4,11 @@
 /**
  * handleOpcode - Handles the opcode and returns the corresponding function
  * @opcode: The opcode to handle
- *
+ * @line_number: number_line to print
+ * @stack: top of the stack pointer.
  * Return: Pointer to the corresponding function, or NULL if not found
  */
-void (*handleOpcode(char **opcode, unsigned int line_number))
-(stack_t **stack, unsigned int line_number)
+int handleOpcode(char **opcode, unsigned int line_number, stack_t **stack)
 {
 	int i;
 	instruction_t instList[] = {
@@ -22,13 +22,13 @@ void (*handleOpcode(char **opcode, unsigned int line_number))
 		{NULL, NULL}
 	};
 
-	(void)line_number;
 	for (i = 0; instList[i].opcode != NULL; i++)
 	{
 		if (strcmp(instList[i].opcode, opcode[0]) == 0)
 		{
-			return (instList[i].f);
+			instList[i].f(stack, line_number);
+			return (0);
 		}
 	}
-	return (NULL);
+	return (1);
 }
