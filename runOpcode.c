@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdlib.h>
 /**
  * handlePush - Handles the "push" opcode
  * @stack: Double pointer to the stack
@@ -27,7 +28,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
-	newNode->n = atoi(commandArgs[1]);
+	newNode->n = atoi(commandArgs[1]) < 0 ?
+		-atoi(commandArgs[1]) : atoi(commandArgs[1]);
 	newNode->next = *stack;
 	newNode->prev = NULL;
 	if ((*stack) != NULL)
