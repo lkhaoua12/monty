@@ -8,6 +8,7 @@
 void handlePush(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newNode = malloc(sizeof(stack_t));
+	int num, is_digit = 0, j = 0;
 
 	if (newNode == NULL)
 	{
@@ -17,9 +18,7 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
-	(void)line_number;
-	if (commandArgs[1] == NULL
-		|| (atoi(commandArgs[1]) == 0 && *commandArgs[0] != '0'))
+	if (commandArgs[1] == NULL)
 	{
 		free(newNode);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -28,7 +27,29 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
-	newNode->n = atoi(commandArgs[1]);
+	num = atoi(commandArgs[1]);
+	if (*commandArgs[1] == '-')
+		j++;
+	for (int i = 0; commandArgs[1][i] != '\0'; i++)
+	{
+		if (i == 0 && commandArgs[1][i] == '-')
+			continue;
+		if (commandArgs[1][i] < 48 ||  commandArgs[1][i] > 58)
+		{
+			is_digit = 1;
+			break;
+		}
+	}
+	if (num == 0 && commandArgs[1][j] != '0' || is_digit)
+	{
+		free(newNode);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		freeArgs(commandArgs);
+		freeList(*stack);
+		close(3);
+		exit(EXIT_FAILURE);
+	}
+	newNode->n = num;
 	newNode->next = *stack;
 	newNode->prev = NULL;
 	if ((*stack) != NULL)
