@@ -53,5 +53,6 @@ void executeCommands(int fd);
 void handleSub(stack_t **stack, unsigned int line_number);
 void handleDiv(stack_t **stack, unsigned int line_number);
 void handleMul(stack_t **stack, unsigned int line_number);
+void handleMod(stack_t **stack, unsigned int line_number);
 #endif
 

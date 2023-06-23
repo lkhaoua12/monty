@@ -22,6 +22,7 @@ int handleOpcode(char **opcode, unsigned int line_number, stack_t **stack)
 		{"sub", handleSub},
 		{"div", handleDiv},
 		{"mul", handleMul},
+		{"mod", handleMod},
 		{NULL, NULL}
 	};
 
