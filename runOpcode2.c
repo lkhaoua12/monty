@@ -44,14 +44,45 @@ void handleSub(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't sub, stack too short", line_number);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		freeArgs(commandArgs);
 		if (*stack)
 			freeList(*stack);
 		exit(EXIT_FAILURE);
 	}
 	current = *stack;
-	current->next->n -= current->n; 
+	current->next->n -= current->n;
+	*stack = current->next;
+	free(current);
+	(*stack)->prev = NULL;
+}
+/**
+ * handleDiv - Adds the top two elements of the stack.
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: The line number of the instruction.
+ */
+void handleDiv(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current = *stack;
+
+	if (stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		freeArgs(commandArgs);
+		if (*stack)
+			freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		freeArgs(commandArgs);
+		if (*stack)
+			freeList(*stack);
+		exit(EXIT_FAILURE);
+	}
+	current = *stack;
+	current->next->n /= current->n;
 	*stack = current->next;
 	free(current);
 	(*stack)->prev = NULL;

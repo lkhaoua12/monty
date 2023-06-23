@@ -51,5 +51,6 @@ void handleAdd(stack_t **stack, unsigned int line_number);
 void handleNop(stack_t **stack, unsigned int line_number);
 void executeCommands(int fd);
 void handleSub(stack_t **stack, unsigned int line_number);
+void handleDiv(stack_t **stack, unsigned int line_number);
 #endif
 
