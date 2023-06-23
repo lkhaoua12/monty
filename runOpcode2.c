@@ -80,6 +80,7 @@ void handleDiv(stack_t **stack, unsigned int line_number)
 		freeArgs(commandArgs);
 		if (*stack)
 			freeList(*stack);
+		close(3);
 		exit(EXIT_FAILURE);
 	}
 	current = *stack;
