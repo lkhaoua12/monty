@@ -18,7 +18,8 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		close(3);
 		exit(EXIT_FAILURE);
 	}
-	if (commandArgs[1] == NULL)
+	is_digit = _isDigit(commandArgs[1]);
+	if (commandArgs[1] == NULL || is_digit == 1)
 	{
 		free(newNode);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -28,27 +29,6 @@ void handlePush(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	num = atoi(commandArgs[1]);
-	if (*commandArgs[1] == '-')
-		j++;
-	for (i = 0; commandArgs[1][i] != '\0'; i++)
-	{
-		if (i == 0 && commandArgs[1][i] == '-')
-			continue;
-		if (commandArgs[1][i] < 48 ||  commandArgs[1][i] > 58)
-		{
-			is_digit = 1;
-			break;
-		}
-	}
-	if ((num == 0 && commandArgs[1][j] != '0') || is_digit)
-	{
-		free(newNode);
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		freeArgs(commandArgs);
-		freeList(*stack);
-		close(3);
-		exit(EXIT_FAILURE);
-	}
 	newNode->n = num;
 	newNode->next = *stack;
 	newNode->prev = NULL;

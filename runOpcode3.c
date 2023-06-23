@@ -31,3 +31,25 @@ void handleMod(stack_t **stack, unsigned int line_number)
 	(*stack) = (*stack)->next;
 	free(current);
 }
+/**
+ * _isDigit - Adds the top two elements of the stack.
+ * @s: char string;
+ * Return: 0 if true else 1.
+ */
+int _isDigit(char *s)
+{
+	int i;
+	int is_digit = 0;
+
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		if (i == 0 && s[i] == '-')
+			continue;
+		if (s[i] < 48 ||  s[i] > 58)
+		{
+			is_digit = 1;
+			break;
+		}
+	}
+	return (is_digit);
+}
